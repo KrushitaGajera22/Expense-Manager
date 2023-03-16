@@ -42,7 +42,7 @@ module.exports.routes = {
    'post /createTransaction': 'TransactionController.createTransaction',
    'get /listTransaction': 'TransactionController.listTransaction',
    'patch /editTransaction/:id': 'TransactionController.editTransaction',
-   'delete /deleteTransactione/:id': 'TransactionController.deleteTransaction',
+   'delete /deleteTransaction/:id': 'TransactionController.deleteTransaction',
  
   /***************************************************************************
   *                                                                          *

@@ -29,9 +29,10 @@ module.exports = {
         try {
             //finding all transactions
             await Transaction.find({})
+                .populate('Account')
                 .then((transactions) => {
                     // count used for counting no. of transaction
-                    res.status(200).send({ count: transactions.length, transactions});
+                    res.status(200).send({ count: transactions.length, transactions });
                 });
         } catch (error) {
             return res.status(500).send({ error: error });

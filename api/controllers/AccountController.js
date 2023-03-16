@@ -4,7 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-
+const Constants = sails.config.constants;
 
 module.exports = {
     //for creating new account
@@ -14,6 +14,19 @@ module.exports = {
             User.findOne(id)
                 .then(async (user) => {
                     if (user) {
+                        const token = await Constants.jwt.sign({
+                            id: id,
+                        },
+                            Constants.jwt_secret,
+                            {
+                                expiresIn: "1h" //expiration time for token 
+                            }
+                        );
+                        //creating a cookie and storing token inside cookie
+                        res.cookie("Token", token, {
+                            httpOnly: true,
+                            // secure: true
+                        })
                         //creating an account
                         await Account.create({
                             AName: req.body.AName,
@@ -35,6 +48,7 @@ module.exports = {
     list: async (req, res) => {
         try {
             await Account.find({})
+                .populate('users')  // populating user
                 .populate('transactions', { sort: 'date DESC' })  //populating transaction model with sorting of dates
                 .then((accounts, transactions) => {
                     res.status(200).send({ count: accounts.length, accounts: accounts, transactions: transactions });
