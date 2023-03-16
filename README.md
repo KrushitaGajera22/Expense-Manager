@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Expense-Manager
 it is made using sails.js
 =======
