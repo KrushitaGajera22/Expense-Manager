@@ -25,7 +25,7 @@ module.exports.policies = {
   },
   AccountController: {
     'create': 'auth',
-    'showAccount': 'auth',
+    // 'showAccount': 'auth',
     'edit': 'auth',
     'delete': 'auth'
   },

@@ -14,19 +14,6 @@ module.exports = {
             User.findOne(id)
                 .then(async (user) => {
                     if (user) {
-                        const token = await Constants.jwt.sign({
-                            id: id,
-                        },
-                            Constants.jwt_secret,
-                            {
-                                expiresIn: "1h" //expiration time for token 
-                            }
-                        );
-                        //creating a cookie and storing token inside cookie
-                        res.cookie("Token", token, {
-                            httpOnly: true,
-                            // secure: true
-                        })
                         //creating an account
                         await Account.create({
                             AName: req.body.AName,
