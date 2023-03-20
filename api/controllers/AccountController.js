@@ -50,8 +50,8 @@ module.exports = {
     //for getting account by specific id
     showAccount: (req, res) => {
         try {
-            const id = req.params.id;
-            Account.findOne({ id: id })
+            let accountId = req.params.id
+            Account.findOne({ id: accountId})
                 //populating transaction model with sorting of dates
                 .populate('transactions', { sort: 'createdAt DESC' })
                 .then((account, transactions) => {
@@ -60,7 +60,9 @@ module.exports = {
                     }
                     res.status(200).send({ account: account, transactions: transactions });
                 });
-        } catch (error) {
+        } 
+        catch (error) {
+            console.log(error);
             res.status(500).send({ error: error });
         }
     },
@@ -68,7 +70,7 @@ module.exports = {
     //for updating account name using id
     edit: async (req, res) => {
         const AName = req.body.AName;
-        const id = req.params.id;
+        const id = req.body.id;
         try {
             //for edit of any account name using its id
             await Account.update({ id: id }, { AName: AName })
@@ -83,7 +85,7 @@ module.exports = {
     // for deleting any account by id
     delete: async (req, res) => {
         try {
-            const accountId = req.params.id;
+            const accountId = req.body.id;
             await Account.destroyOne({ id: accountId })
                 .then((accountId) => {
                     if (!accountId) {

@@ -43,13 +43,13 @@ module.exports = {
 
     //for editing anything in transaction 
     editTransaction: async (req, res) => {
-        const id = req.params.id;
+        const id = req.body.id;
         try {
             // updating transaction using its id
             await Transaction.update({ id: id }, {
                 types: req.body.types,
                 amount: req.body.amount,
-                date: req.body.date
+                date: req.body.date,
             }).then((transaction) => {
                 res.status(200).send({ message: "Transaction updated", transaction });
             });
@@ -61,7 +61,7 @@ module.exports = {
     //for deleting any transaction using id
     deleteTransaction: async (req, res) => {
         try {
-            const transactionId = req.params.id;
+            const transactionId = req.body.id;
             // getting id which is going to be deleted
             await Transaction.destroyOne({ id: transactionId })
                 .then((transactionId) => {

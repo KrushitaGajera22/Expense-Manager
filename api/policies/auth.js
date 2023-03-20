@@ -4,18 +4,19 @@ module.exports = function (req, res, next) {
   try {
     let token = req.cookies.jwt;
     Constants.jwt.verify(token, Constants.jwt_secret, (err, decoded) => {
-      if(err) { throw err; }
-      else{
-        if(decoded.id !== (req.params.id || req.body.id)){
-          return res.status(401).send({ message: 'Unauthorized'});
+      if (err) { throw err; }
+      else {
+        if (decoded.id !== (req.params.id || req.body.id)) {
+          return res.status(401).send({ message: 'Unauthorized' });
         }
-        else{
+        else {
           next();
         }
       }
     });
-    
+
   } catch (error) {
+    console.log(error);
     return res.status(401).json({
       error: error
     });

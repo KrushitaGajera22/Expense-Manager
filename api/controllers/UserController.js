@@ -77,7 +77,7 @@ module.exports = {
 
     //add users to account using email
     addEmail: async (req, res) => {
-        let id = req.params.id;
+        let id = req.body.id;
         let email = req.body.email;
         try {
             // find email in users
