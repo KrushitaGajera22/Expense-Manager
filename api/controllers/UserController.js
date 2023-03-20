@@ -31,7 +31,7 @@ module.exports = {
         });
         //for creating default account after signup
         await Account.create({
-            id: Constants.uuid.v4(),
+            id: Constants.uuid.v4(), //generating uuid
             AName: req.body.name,
             user: user.id,
         })
@@ -117,7 +117,7 @@ module.exports = {
             await User.findOne({ id: id })
                 .populate('accounts') //populating account model
                 .then((user) => {
-                    if(!user) {
+                    if (!user) {
                         return res.status(404).send({ message: 'User not found' })
                     }
                     res.status(200).send({ user: user });

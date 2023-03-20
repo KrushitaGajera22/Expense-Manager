@@ -16,7 +16,7 @@ module.exports = {
                     if (user) {
                         //creating an account
                         await Account.create({
-                            id: Constants.uuid.v4(),
+                            id: Constants.uuid.v4(), //generating uuid
                             AName: req.body.AName,
                             user: req.body.id,
                         })
@@ -51,7 +51,7 @@ module.exports = {
     showAccount: (req, res) => {
         try {
             let accountId = req.params.id
-            Account.findOne({ id: accountId})
+            Account.findOne({ id: accountId })
                 //populating transaction model with sorting of dates
                 .populate('transactions', { sort: 'createdAt DESC' })
                 .then((account, transactions) => {
@@ -60,7 +60,7 @@ module.exports = {
                     }
                     res.status(200).send({ account: account, transactions: transactions });
                 });
-        } 
+        }
         catch (error) {
             console.log(error);
             res.status(500).send({ error: error });
@@ -86,6 +86,7 @@ module.exports = {
     delete: async (req, res) => {
         try {
             const accountId = req.body.id;
+            // getting id which is going to be deleted
             await Account.destroyOne({ id: accountId })
                 .then((accountId) => {
                     if (!accountId) {

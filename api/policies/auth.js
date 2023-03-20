@@ -3,6 +3,7 @@ const Constants = sails.config.constants;
 module.exports = function (req, res, next) {
   try {
     let token = req.cookies.jwt;
+    //verifying the token stored inside cookies
     Constants.jwt.verify(token, Constants.jwt_secret, (err, decoded) => {
       if (err) { throw err; }
       else {

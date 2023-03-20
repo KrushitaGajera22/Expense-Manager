@@ -22,15 +22,15 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
   //routes for userController
   'post /signup': 'UserController.signup',
-  'post /login':'UserController.login',
-  'post /addEmail/:id':'UserController.addEmail',
+  'post /login': 'UserController.login',
+  'post /addEmail/:id': 'UserController.addEmail',
   'get /list': 'UserController.list',
   'get /show/:id': 'UserController.show',
   'patch /update/:id': 'UserController.update',
   'get /logout/:id': 'UserController.logout',
 
 
-   //routes for accountController
+  //routes for accountController
   'post /create': 'AccountController.create',
   'get /lists': 'AccountController.list',
   'get /showAccount/:id': 'AccountController.showAccount',
@@ -38,12 +38,12 @@ module.exports.routes = {
   'delete /delete/:id': 'AccountController.delete',
 
 
-   //routes for transactionController
-   'post /createTransaction': 'TransactionController.createTransaction',
-   'get /listTransaction': 'TransactionController.listTransaction',
-   'patch /editTransaction/:id': 'TransactionController.editTransaction',
-   'delete /deleteTransaction/:id': 'TransactionController.deleteTransaction',
- 
+  //routes for transactionController
+  'post /createTransaction': 'TransactionController.createTransaction',
+  'get /listTransaction': 'TransactionController.listTransaction',
+  'patch /editTransaction/:id': 'TransactionController.editTransaction',
+  'delete /deleteTransaction/:id': 'TransactionController.deleteTransaction',
+
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *

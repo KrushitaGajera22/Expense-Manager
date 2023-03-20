@@ -17,7 +17,7 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-    '*': 'auth',
+  '*': 'auth',
   UserController: {
     'signup': true,
     'login': true,

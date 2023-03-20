@@ -12,7 +12,7 @@ module.exports = {
         try {
             //get data from body to create transaction
             await Transaction.create({
-                id: Constants.uuid.v4(),
+                id: Constants.uuid.v4(), //generating uuid
                 types: req.body.types,
                 amount: req.body.amount,
                 Account: req.body.Account,

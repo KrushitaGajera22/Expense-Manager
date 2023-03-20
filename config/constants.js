@@ -6,7 +6,7 @@ let uuid = require('uuid')
 module.exports.constants = {
     jwt_secret: '!@3secret#$',
     pass: 'jfpp cgjy rwie xbkj',
-    userName : 'krushitagajera22@gmail.com',
+    userName: 'krushitagajera22@gmail.com',
     jwt: jwt,
     bcrypt: bcrypt,
     nodemailer: nodemailer,

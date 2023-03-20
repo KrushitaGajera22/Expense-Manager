@@ -16,9 +16,9 @@ module.exports = {
       type: 'number',
       required: true,
     },
-    date: { 
-      type: 'ref', 
-      columnType: 'datetime', 
+    date: {
+      type: 'ref',
+      columnType: 'datetime',
       required: true,
     },
 
