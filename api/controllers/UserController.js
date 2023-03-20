@@ -16,6 +16,7 @@ module.exports = {
         const hash = await Constants.bcrypt.hash(password, 10)
         //creating a user
         const user = await User.create({
+            id: Constants.uuid.v4(),
             name: req.body.name,
             email: req.body.email,
             password: hash
@@ -28,9 +29,9 @@ module.exports = {
             pass: Constants.pass,
             to: req.body.email
         });
-
         //for creating default account after signup
         await Account.create({
+            id: Constants.uuid.v4(),
             AName: req.body.name,
             user: user.id,
         })

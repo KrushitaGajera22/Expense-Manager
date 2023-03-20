@@ -4,7 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-
+const Constants = sails.config.constants;
 
 module.exports = {
     //for creating a transaction
@@ -12,6 +12,7 @@ module.exports = {
         try {
             //get data from body to create transaction
             await Transaction.create({
+                id: Constants.uuid.v4(),
                 types: req.body.types,
                 amount: req.body.amount,
                 Account: req.body.Account,
@@ -20,6 +21,7 @@ module.exports = {
             res.status(201).send({ message: "New Transaction added!!" })
         }
         catch (error) {
+            console.log(error);
             return res.status(500).send({ error: error });
         }
     },

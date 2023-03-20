@@ -16,6 +16,7 @@ module.exports = {
                     if (user) {
                         //creating an account
                         await Account.create({
+                            id: Constants.uuid.v4(),
                             AName: req.body.AName,
                             user: req.body.id,
                         })
@@ -35,8 +36,9 @@ module.exports = {
     list: async (req, res) => {
         try {
             await Account.find({})
+                .populate('transactions', { sort: 'createdAt DESC' })
+                //populating transaction model with sorting of dates
                 .populate('users')  // populating user
-                .populate('transactions', { sort: 'date DESC' })  //populating transaction model with sorting of dates
                 .then((accounts, transactions) => {
                     res.status(200).send({ count: accounts.length, accounts: accounts, transactions: transactions });
                 });
@@ -51,7 +53,7 @@ module.exports = {
             const id = req.params.id;
             Account.findOne({ id: id })
                 //populating transaction model with sorting of dates
-                .populate('transactions', { sort: 'date DESC' })
+                .populate('transactions', { sort: 'createdAt DESC' })
                 .then((account, transactions) => {
                     if (!account) {
                         return res.status(404).send({ message: 'Account not found' })

@@ -17,17 +17,16 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  //  '*': 'auth',
+    '*': 'auth',
   UserController: {
-    'addEmail': 'auth',
-    'update': 'auth',
-    'delete': 'auth'
+    'signup': true,
+    'login': true
   },
   AccountController: {
-    'create': 'auth',
-    // 'showAccount': 'auth',
-    'edit': 'auth',
-    'delete': 'auth'
+    'list': true,
+    'showAccount': true,
+    'edit': true,
+    'delete': true
   },
   TransactionController: {
     'createTransaction': true,

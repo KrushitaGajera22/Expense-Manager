@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-
+  dontUseObjectIds: true,
   attributes: {
     types: {
       type: 'string',
@@ -19,7 +19,8 @@ module.exports = {
     date: { 
       type: 'ref', 
       columnType: 'datetime', 
-      required: true },
+      required: true,
+    },
 
     //using account model with one-to-many association
     Account: {

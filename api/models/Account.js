@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-
+  dontUseObjectIds: true,
   attributes: {
     AName: {
       type: 'string',
