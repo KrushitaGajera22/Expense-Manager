@@ -11,15 +11,16 @@ const Constants = sails.config.constants;
 module.exports = {
     //for creating a new user
     signup: async (req, res) => {
-        let password = req.body.password;
-        //for hashing the password
-        const hash = await Constants.bcrypt.hash(password, 10)
+        //hashing password using helper
+        const hash = await sails.helpers.hashPassword.with({
+            password: req.body.password
+        })
         //creating a user
         const user = await User.create({
             id: Constants.uuid.v4(),
             name: req.body.name,
             email: req.body.email,
-            password: hash
+            password: hash.hash
         })
             .fetch()
 
@@ -52,22 +53,17 @@ module.exports = {
                         return res.status(401).send({ error: err });
                     }
                     if (result) {
-                        //signing the token
-                        const token = await Constants.jwt.sign({
-                            email: user[0].email,
-                            id: user[0].id,
-                        },
-                            Constants.jwt_secret,
-                            {
-                                expiresIn: "1h" //expiration time for token 
-                            }
-                        );
+                        //signing the token using helper
+                        const token = await sails.helpers.generateToken.with({
+                            data:  {id: user[0].id},
+                            expiresIn: 3600
+                        });
                         //creating a cookie and storing token inside cookie
-                        res.cookie("jwt", token, {
+                        res.cookie("jwt", token.token, {
                             httpOnly: true,
                             // secure: true
                         })
-                        return res.status(200).send({ message: "logged in!!", token: token, user: user })
+                        return res.status(200).send({ message: "logged in!!", token: token.token, user: user })
                     }
                     res.status(500).send({ message: "Invalid details" })
                 })
